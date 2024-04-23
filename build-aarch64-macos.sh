@@ -134,7 +134,7 @@ fi
 bazel build -c "$BAZEL_CONFIG" \
 	--action_env PYTHON_BIN_PATH="$PYTHON_BIN_PATH" \
 	--define MEDIAPIPE_DISABLE_GPU=1 \
-	mediapipe/c:mediapipe
+	mediapipe/c:mediapipe mediapipe/modules/pose_landmark:pose_landmark_cpu
 
 cd ..
 
