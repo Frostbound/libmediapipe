@@ -6,6 +6,7 @@ shopt -s nullglob
 VERSION="v0.8.11"
 OPENCV_DIR=""
 CONFIG="debug"
+OUTPUT_DIR=""
 
 while [[ "$#" -gt 0 ]]; do
 	case $1 in
@@ -21,6 +22,11 @@ while [[ "$#" -gt 0 ]]; do
 			;;
 		--opencv_dir)
 			OPENCV_DIR=$(realpath "$2")
+			shift
+			shift
+			;;
+		--output_dir)
+			OUTPUT_DIR="$2"
 			shift
 			shift
 			;;
@@ -44,8 +50,9 @@ echo "--------------------------------"
 echo "MediaPipe version: $VERSION"
 echo "OpenCV directory: $OPENCV_DIR"
 echo "Build configuration: $CONFIG"
+echo "Build output directory: $OUTPUT_DIR"
 
-OUTPUT_DIR="output"
+#OUTPUT_DIR="output"
 PACKAGE_DIR="$OUTPUT_DIR/libmediapipe-$VERSION-aarch64-macos"
 DATA_DIR="$OUTPUT_DIR/data"
 
