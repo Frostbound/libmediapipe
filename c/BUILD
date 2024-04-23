@@ -8,6 +8,8 @@ cc_binary(
     defines = ["MEDIAPIPE_EXPORT"],
     data = [
 	    "//mediapipe/modules/pose_detection:pose_detection.tflite",
+        "//mediapipe/modules/pose_landmark:pose_landmark_lite.tflite",
+        "//mediapipe/modules/pose_landmark:pose_landmark_full.tflite",
 	    "//mediapipe/modules/pose_landmark:pose_landmark_heavy.tflite",
     ],
     deps = [
