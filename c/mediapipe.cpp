@@ -74,7 +74,9 @@ static mp_multi_face_landmark_list* get_multi_face_landmarks(mp_packet* packet) 
             list[j] = {
                 mp_landmark.x(),
                 mp_landmark.y(),
-                mp_landmark.z()
+                mp_landmark.z(),
+                mp_landmark.visibility(),
+                mp_landmark.presence()
             };
         }
 
@@ -100,7 +102,9 @@ static mp_landmark_list* get_landmarks(mp_packet* packet) {
         list[j] = {
             mp_landmark.x(),
             mp_landmark.y(),
-            mp_landmark.z()
+            mp_landmark.z(),
+            mp_landmark.visibility(),
+            mp_landmark.presence(),
         };
     }
 
@@ -137,6 +141,11 @@ extern "C" {
 
 MEDIAPIPE_API mp_instance_builder* mp_create_instance_builder(const char* graph_filename, const char* input_stream) {
     return new mp_instance_builder { graph_filename, input_stream, {} };
+}
+
+MEDIAPIPE_API void mp_destroy_instance_builder(mp_instance_builder* instance_builder)
+{
+    delete instance_builder;
 }
 
 MEDIAPIPE_API void mp_add_option_float(mp_instance_builder* instance_builder, const char* node, const char* option, float value) {

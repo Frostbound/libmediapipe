@@ -58,51 +58,53 @@ typedef enum : int {
 } mp_image_format;
 
 /// A structure for wrapping pixel data.
-typedef struct {
+struct mp_image{
     const uint8_t* data;
     int width;
     int height;
     mp_image_format format;
-} mp_image;
+};
 
 /// The 3D position of a landmark.
-typedef struct {
+struct mp_landmark {
     float x;
     float y;
     float z;
-} mp_landmark;
+    float visibility;
+    float presence;
+};
 
 /// A list of landmarks detected for a face or hand.
-typedef struct {
+struct mp_landmark_list {
     mp_landmark* elements;
     int length;
-} mp_landmark_list;
+};
 
 /// A list of hands or faces detected in an image.
-typedef struct {
+struct mp_multi_face_landmark_list {
     mp_landmark_list* elements;
     int length;
-} mp_multi_face_landmark_list;
+};
 
 /// A rectangle with a rotation in radians.
-typedef struct {
+struct mp_rect {
     float x_center;
     float y_center;
     float width;
     float height;
     float rotation;
     long long id;
-} mp_rect;
+};
 
 /// A list of rectangles.
-typedef struct {
+struct mp_rect_list {
     mp_rect* elements;
     int length;
-} mp_rect_list;
+};
 
 /// Hand landmark indices in a mp_landmark_list.
 /// For more information, see: https://google.github.io/mediapipe/solutions/hands.html#hand-landmark-model
-typedef enum {
+enum mp_hand_landmark{
     mp_hand_landmark_wrist = 0,
     mp_hand_landmark_thumb_cmc = 1,
     mp_hand_landmark_thumb_mcp = 2,
@@ -124,9 +126,9 @@ typedef enum {
     mp_hand_landmark_pinky_pip = 18,
     mp_hand_landmark_pinky_dip = 19,
     mp_hand_landmark_pinky_tip = 20
-} mp_hand_landmark;
+};
 
-typedef enum {
+enum mp_pose_landmark{
     mp_pose_landmark_nose = 0,
     mp_pose_landmark_left_eye_inner = 1,
     mp_pose_landmark_left_eye = 2,
@@ -160,11 +162,13 @@ typedef enum {
     mp_pose_landmark_right_heel = 30,
     mp_pose_landmark_left_foot_index = 31,
     mp_pose_landmark_right_foot_index = 32
-} mp_pose_landmark;
+};
 
 /// Creates an instance builder, which is used by mp_create_instance to create a MediaPipe instance.
 /// The instance builder requires the path to the binary graph and the name of the input stream.
 MEDIAPIPE_API mp_instance_builder* mp_create_instance_builder(const char* graph_filename, const char* input_stream);
+
+MEDIAPIPE_API void mp_destroy_instance_builder(mp_instance_builder* instance_builder);
 
 /// Sets a float value in the node options of the graph.
 MEDIAPIPE_API void mp_add_option_float(mp_instance_builder* instance_builder, const char* node, const char* option, float value);
