@@ -126,6 +126,42 @@ typedef enum {
     mp_hand_landmark_pinky_tip = 20
 } mp_hand_landmark;
 
+typedef enum {
+    mp_pose_landmark_nose = 0,
+    mp_pose_landmark_left_eye_inner = 1,
+    mp_pose_landmark_left_eye = 2,
+    mp_pose_landmark_left_eye_outer = 3,
+    mp_pose_landmark_right_eye_inner = 4,
+    mp_pose_landmark_right_eye = 5,
+    mp_pose_landmark_right_eye_outer = 6,
+    mp_pose_landmark_left_ear = 7,
+    mp_pose_landmark_right_ear = 8,
+    mp_pose_landmark_mouth_left = 9,
+    mp_pose_landmark_mouth_right = 10,
+    mp_pose_landmark_left_shoulder = 11,
+    mp_pose_landmark_right_shoulder = 12,
+    mp_pose_landmark_left_elbow = 13,
+    mp_pose_landmark_right_elbow = 14,
+    mp_pose_landmark_left_wrist = 15,
+    mp_pose_landmark_right_wrist = 16,
+    mp_pose_landmark_left_pinky = 17,
+    mp_pose_landmark_right_pinky = 18,
+    mp_pose_landmark_left_index = 19,
+    mp_pose_landmark_right_index = 20,
+    mp_pose_landmark_left_thumb = 21,
+    mp_pose_landmark_right_thumb = 22,
+    mp_pose_landmark_left_hip = 23,
+    mp_pose_landmark_right_hip = 24,
+    mp_pose_landmark_left_knee = 25,
+    mp_pose_landmark_right_knee = 26,
+    mp_pose_landmark_left_ankle = 27,
+    mp_pose_landmark_right_ankle = 28,
+    mp_pose_landmark_left_heel = 29,
+    mp_pose_landmark_right_heel = 30,
+    mp_pose_landmark_left_foot_index = 31,
+    mp_pose_landmark_right_foot_index = 32
+} mp_pose_landmark;
+
 /// Creates an instance builder, which is used by mp_create_instance to create a MediaPipe instance.
 /// The instance builder requires the path to the binary graph and the name of the input stream.
 MEDIAPIPE_API mp_instance_builder* mp_create_instance_builder(const char* graph_filename, const char* input_stream);
@@ -228,6 +264,18 @@ MEDIAPIPE_API mp_multi_face_landmark_list* mp_get_norm_multi_face_landmarks(mp_p
 
 /// Deallocates a multi-face landmark list.
 MEDIAPIPE_API void mp_destroy_multi_face_landmarks(mp_multi_face_landmark_list* multi_face_landmarks);
+
+/// Returns the landmarks of a packet.
+/// The list should be destroyed with mp_destroy_landmarks.
+MEDIAPIPE_API mp_landmark_list* mp_get_landmarks(mp_packet* packet);
+
+/// Returns the normalized landmarks of a packet.
+/// The list should be destroyed with mp_destroy_landmarks.
+MEDIAPIPE_API mp_landmark_list* mp_get_norm_landmarks(mp_packet* packet);
+
+/// Deallocates a landmark list.
+MEDIAPIPE_API void mp_destroy_landmarks(mp_landmark_list* landmarks);
+
 
 /// Returns the rectangles of a packet.
 /// The list should be destroyed with mp_destroy_rects.
