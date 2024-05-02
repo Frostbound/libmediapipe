@@ -114,6 +114,11 @@ static mp_landmark_list* get_landmarks(mp_packet* packet) {
     };
 }
 
+bool mp_packet_get_bool(mp_packet* packet)
+{
+    return packet->packet.Get<bool>();
+}
+
 template<typename Rect>
 static mp_rect_list* get_rects(mp_packet* packet) {
     const auto& mp_data = packet->packet.template Get<std::vector<Rect>>();

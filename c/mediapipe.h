@@ -266,6 +266,8 @@ MEDIAPIPE_API mp_multi_face_landmark_list* mp_get_multi_face_landmarks(mp_packet
 /// The list should be destroyed with mp_destroy_multi_face_landmarks.
 MEDIAPIPE_API mp_multi_face_landmark_list* mp_get_norm_multi_face_landmarks(mp_packet* packet);
 
+MEDIAPIPE_API bool mp_packet_get_bool(mp_packet* packet);
+
 /// Deallocates a multi-face landmark list.
 MEDIAPIPE_API void mp_destroy_multi_face_landmarks(mp_multi_face_landmark_list* multi_face_landmarks);
 
